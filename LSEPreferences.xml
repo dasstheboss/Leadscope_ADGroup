@@ -1,0 +1,52 @@
+<preferences>
+  <application name="LeadScopeEnterpriseServer">
+    <key name="server">
+      <key name="isfvendorapi.userName">
+      </key>
+      <key name="isfvendorapi.companyName">
+        <value type="java.lang.String">Eli-Lilly</value>
+      </key>
+      <key name="instance">
+        <value type="int">4</value>
+      </key>
+      <key name="httpServer.listenPort">
+      </key>
+      <key name="webapps.enable">
+        <value type="boolean">true</value>
+      </key>
+      <key name="webapps.session.timeout">
+      </key>
+      <key name="auth.principal.name">
+	<value type="java.lang.String">C214649</value>
+	<value type="java.lang.String">C220070</value>
+      </key>
+      <key name="enforce.permissions">
+        <value type="boolean">true</value>
+      </key>
+      <key name="check.integrity">
+        <value type="boolean">true</value>
+      </key>
+    </key>
+    <key name="search">
+      <key name="index.dir">
+        <value type="java.lang.String">/opt/lse/v3_4/search_indices/lse_owner</value>
+      </key>
+    </key>
+    <key name="datasource">
+      <key name="url">
+      </key>
+      <key name="user">
+        <value type="java.lang.String">lse_owner</value>
+      </key>
+      <key name="password">
+        <value type="java.lang.String">LSE@qar558</value>
+      </key>
+      <key name="min.connections">
+        <value type="int">3</value>
+      </key>
+      <key name="max.connections">
+      </key>
+    </key>
+  </application>
+</preferences>
+

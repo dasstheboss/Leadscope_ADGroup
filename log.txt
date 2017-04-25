@@ -1,0 +1,8 @@
+2017-04-24 07:39:11 - [Revoke]	User ID 'VINAY'	deleted from LSEPreference.xml file. 
+2017-04-24 07:39:11 - [Revoke]	User ID 'C220071'	deleted from LSEPreference.xml file. 
+2017-04-24 07:39:44 - [Grant]	User ID 'C214649'	inserted to LSEPreference.xml file. 
+2017-04-24 07:42:09 - [Revoke]	User ID 'C214659'	deleted from LSEPreference.xml file. 
+2017-04-24 07:42:09 - [Revoke]	User ID 'VINAY'	deleted from LSEPreference.xml file. 
+2017-04-24 07:42:09 - [Revoke]	User ID 'C214699'	deleted from LSEPreference.xml file. 
+2017-04-24 07:42:09 - [Grant]	User ID 'C214649'	inserted to LSEPreference.xml file. 
+2017-04-25 10:07:55 - [Revoke]	User ID 'VINAY'	deleted from LSEPreference.xml file. 

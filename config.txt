@@ -1,0 +1,11 @@
+driver = Oracle
+oracleEnvironment = ./oracle_env.dat
+databaseServer = harrison.am.lilly.com
+databasePort = 1540
+database = qar558
+userID = LSE_ActiveScript
+passw0rd = Txtx_1234
+xmlPath = ./LSEPreferences.xml
+logPath = ./log.txt
+checksumPath = ./checkSum.txt
+#xmlPath = /opt/lse/current/instances/4/resources/settings/LSEPreferences.xml
