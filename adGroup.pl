@@ -32,7 +32,7 @@ sub adParse {
  #$ENV{PATH} = "/usr/bin/";
  my @userID = `/usr/bin/ldapsearch -x -H ldap://unxldap.global.lilly.com/ -b ou=group,dc=gds,o=lilly.com cn=lseUser | sed -n -e 's/^memberUid.* //p'`;
  chomp(@userID);
- print "No of users:", scalar(@userID),"\n";
+ traceNotify("Number of users in Active Directory group:", scalar(@userID),"\n");
  return @userID;
 }
 
@@ -48,13 +48,12 @@ my %config = @_;
 
     push(@output,$ID->{content});
   }
-  print "No of users:", scalar(@output),"\n";
+  traceNotify("Number of users in XMLPreferences file:", scalar(@output),"\n");
   return @output;
 }
 
 sub xmlRemover{
  my $toRemove = $_[0];
- #my $xmlPath = "./LSEPreferences.xml";
  system("sed -i /$toRemove/Id $config_hash{'xmlPath'}");
 }
 
@@ -62,16 +61,15 @@ sub xmlWriter{
  my $newUser = $_[0];
  $newUser = &trim($newUser);
  print "New user: $newUser \n";
- #tet path of XMl file from config file 
-# my $xmlPath = "./LSEPreferences.xml";
- #ente new user ID to Preference fiel
+ #the path of XMl file from config file 
+ #enter new user ID to Preference file
  open(FILE,"$xmlPath") || die "can't open file for read\n";
  my @lines=<FILE>;
  close(FILE);
  open(FILE,">$xmlPath")|| die "can't open file for write\n";
  foreach $line (@lines){
     print FILE $line;
-    print FILE "<value type=\"java.lang.String\">$newUser</value>\n" if($line =~ /<key name="auth.principal.name">/); #Insert newUser Id along with required text.
+    print FILE "<value type=\"java.lang.String\">$newUser</value>\n" if($line =~ /<key name="auth.principal.name">/); #Insert newUser ID.
   }
  close(FILE);
 }
@@ -83,8 +81,8 @@ sub idCompare{
  my @finalUser; 
  tr/a-z/A-Z/ for @adUser;
  tr/a-z/A-Z/ for @xmlUser;
- #print "AD: @adUser \n";
- #print "XML:@xmlUser \n";
+ &traceNotify("AD: @adUser \n");
+ &traceNotify("XML:@xmlUser \n");
 
  my %diff;
 
@@ -97,7 +95,8 @@ sub idCompare{
    &xmlRemover($xml);
    my $logDetail = "[Revoke]	User ID '$xml'	deleted from LSEPreference.xml file.";
    &logNotify($logDetail) or die;
-   print "$xml is deleted from LSEPref file \n";
+   my $traceDetail = "$xml is deleted from LSEPref file \n";
+   &traceNotify($traceDetail) or die;
  }
 
  my %diff1;
@@ -123,6 +122,15 @@ sub logNotify {
   open ($logFile, '>>', $logPath) or die;
   print $logFile "$date - $logDetail \n";
   close $logFile;
+}
+
+sub traceNotify {
+  my ($tracePath) = $config_hash{'tracePath'};
+  my $traceDetail = $_[0];
+  my $date = strftime '%Y-%m-%d %T', localtime;
+  open ($traceFile, '>>', $tracePath) or die;
+  print $traceFile "$date - $traceDetail \n";
+  close $traceFile;
 }
 
 $config_file = shift;

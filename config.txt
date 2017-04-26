@@ -7,5 +7,6 @@ userID = LSE_ActiveScript
 passw0rd = Txtx_1234
 xmlPath = ./LSEPreferences.xml
 logPath = ./log.txt
+tracePath = ./trace.txt
 checksumPath = ./checkSum.txt
 #xmlPath = /opt/lse/current/instances/4/resources/settings/LSEPreferences.xml
