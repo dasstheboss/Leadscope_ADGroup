@@ -45,7 +45,6 @@ my %config = @_;
 
  my @output=();
  foreach $ID (@{$input->{application}{LeadScopeEnterpriseServer}{key}{server}{key}{'auth.principal.name'}{value}}){
-
     push(@output,$ID->{content});
   }
   traceNotify("Number of users in XMLPreferences file:", scalar(@output),"\n");
@@ -60,7 +59,7 @@ sub xmlRemover{
 sub xmlWriter{
  my $newUser = $_[0];
  $newUser = &trim($newUser);
- print "New user: $newUser \n";
+ &traceNotify("New user: $newUser \n");
  #the path of XMl file from config file 
  #enter new user ID to Preference file
  open(FILE,"$xmlPath") || die "can't open file for read\n";
@@ -95,8 +94,7 @@ sub idCompare{
    &xmlRemover($xml);
    my $logDetail = "[Revoke]	User ID '$xml'	deleted from LSEPreference.xml file.";
    &logNotify($logDetail) or die;
-   my $traceDetail = "$xml is deleted from LSEPref file \n";
-   &traceNotify($traceDetail) or die;
+   &traceNotify("$xml is deleted from LSEPref file \n");
  }
 
  my %diff1;
@@ -110,7 +108,7 @@ sub idCompare{
    &xmlWriter($ad);
    my $logDetail = "[Grant]	User ID '$ad'	inserted to LSEPreference.xml file.";
    &logNotify($logDetail) or die;
-   print "$ad is inserted to LSEPref file \n";
+   &traceNotify("$ad is inserted to LSEPref file \n") or die;
  }
 
 }
@@ -136,6 +134,6 @@ sub traceNotify {
 $config_file = shift;
 %config_hash = &hashConfigurations($config_file);
 $xmlPath = $config_hash{'xmlPath'};   #It is a global variable, will be used in xmlRemover and xmlWriter
-my @activeUsers = &XML_Parse(%config_hash);
 my @adUsers = &adParse;
+my @activeUsers = &XML_Parse(%config_hash);
 &idCompare(\@adUsers,\@activeUsers);
